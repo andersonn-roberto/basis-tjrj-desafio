@@ -8,6 +8,6 @@ namespace LivrosApp.Application.Interfaces
         Task<IEnumerable<Assunto>> GetAllAssuntos();
         Task<Assunto> GetAssuntoById(int codAs);
         Task<bool> UpdateAssunto(Assunto detalhesAssunto);
-        Task<bool> DeleteAssunto(int codAs);
+        Task<(bool, string)> DeleteAssunto(int codAs);
     }
 }

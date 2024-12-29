@@ -1,0 +1,34 @@
+<h4>Canais Venda</h4>
+
+<button class="btn btn-primary" (click)="addCanalVenda()">
+  Adicionar Canal Venda
+</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Nome</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (canalVenda of canaisVenda; track canalVenda.nome; let i = $index) {
+    <tr>
+      <td>{{ canalVenda.codCv }}</td>
+      <td>{{ canalVenda.nome }}</td>
+      <td>
+        <a
+          class="btn btn-warning"
+          href=""
+          [routerLink]="['/canaisvendaEdit/', canalVenda.codCv]"
+          >Editar</a
+        >
+        <a class="btn btn-danger" (click)="deleteCanalVenda(canalVenda.codCv)"
+          >Excluir</a
+        >
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

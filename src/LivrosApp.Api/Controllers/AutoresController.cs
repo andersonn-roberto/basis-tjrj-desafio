@@ -62,12 +62,12 @@ namespace LivrosApp.Server.Controllers
         [HttpDelete("{codAu}")]
         public async Task<IActionResult> DeleteAutor(int codAu)
         {
-            var result = await _autorService.DeleteAutor(codAu);
+            var (result, mensagem) = await _autorService.DeleteAutor(codAu);
             if (result)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(mensagem);
         }
     }
 }

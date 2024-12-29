@@ -1,0 +1,14 @@
+<h4>Novo Autor</h4>
+
+<form #autorForm="ngForm">
+    <div class="form-group p-10 row">
+        <div class="col-sm-3">
+            <label for="nome">Nome</label>
+        </div>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="addAutorForm.nome" required maxlength="40">
+        </div>
+    </div>
+    <a href="" routerLink="/autores" class="btn btn-danger back">Voltar</a>
+    <button class="btn btn-success" (click)="addAutor()">Adicionar</button>
+</form>

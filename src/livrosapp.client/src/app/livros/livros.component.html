@@ -1,0 +1,42 @@
+<h4>Canais Venda</h4>
+
+<button class="btn btn-primary" (click)="addLivro()">
+  Adicionar Canal Venda
+</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Título</th>
+      <th scope="col">Editora</th>
+      <th scope="col">Edição</th>
+      <th scope="col">Ano Publicação</th>
+      <th scope="col">Autor(es)</th>
+      <th scope="col">Assunto(s)</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (livro of livros; track livro.titulo; let i = $index) {
+    <tr>
+      <td>{{ livro.codL }}</td>
+      <td>{{ livro.titulo }}</td>
+      <td>{{ livro.editora }}</td>
+      <td>{{ livro.edicao }}</td>
+      <td>{{ livro.anoPublicacao }}</td>
+      <td>{{ livro.autores }}</td>
+      <td>{{ livro.assuntos }}</td>
+      <td>
+        <a
+          class="btn btn-warning"
+          href=""
+          [routerLink]="['/livrosEdit/', livro.codCv]"
+          >Editar</a
+        >
+        <a class="btn btn-danger" (click)="deleteLivro(livro.codCv)">Excluir</a>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

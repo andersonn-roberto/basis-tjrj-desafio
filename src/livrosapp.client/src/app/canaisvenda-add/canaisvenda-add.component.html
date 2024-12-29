@@ -1,0 +1,14 @@
+<h4>Novo Canal Venda</h4>
+
+<form>
+    <div class="form-group p-10 row">
+        <div class="col-sm-3">
+            <label for="nome">Nome</label>
+        </div>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="nome" name="nome" [formControl]="nome" required maxlength="20">
+        </div>
+    </div>
+    <a href="" routerLink="/canaisvenda" class="btn btn-danger back">Voltar</a>
+    <button class="btn btn-success" (click)="addCanalVenda()">Adicionar</button>
+</form>

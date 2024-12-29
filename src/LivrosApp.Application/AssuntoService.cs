@@ -24,22 +24,26 @@ namespace LivrosApp.Application
             }
             return false;
         }
-        public async Task<bool> DeleteAssunto(int codAs)
+        public async Task<(bool, string)> DeleteAssunto(int codAs)
         {
             if (codAs > 0)
             {
+                var hasLivro = (await _unitOfWork.LivrosAssuntos.GetAll(la => la.Assunto_CodAs == codAs)).Any();
+                if (hasLivro)
+                    return (false, "Não é possível excluir um assunto relacionado à um livro.");
+
                 var assunto = await _unitOfWork.Assuntos.GetById(codAs);
                 if (assunto != null)
                 {
                     _unitOfWork.Assuntos.Remove(assunto);
                     var result = _unitOfWork.Save();
                     if (result > 0)
-                        return true;
+                        return (true, "");
                     else
-                        return false;
+                        return (false, "");
                 }
             }
-            return false;
+            return (false, "");
         }
         public async Task<IEnumerable<Assunto>> GetAllAssuntos()
         {

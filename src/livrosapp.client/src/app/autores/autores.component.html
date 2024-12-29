@@ -1,0 +1,30 @@
+<h4>Autores</h4>
+
+<button class="btn btn-primary" (click)="addAutor()">Adicionar Autor</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Nome</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (autor of autores; track autor.nome; let i = $index) {
+    <tr>
+      <td>{{ autor.codAu }}</td>
+      <td>{{ autor.nome }}</td>
+      <td>
+        <a
+          class="btn btn-warning"
+          href=""
+          [routerLink]="['/autoresEdit/', autor.codAu]"
+          >Editar</a
+        >
+        <a class="btn btn-danger" (click)="deleteAutor(autor.codAu)">Excluir</a>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

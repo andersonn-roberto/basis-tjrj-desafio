@@ -53,7 +53,7 @@ namespace LivrosApp.Application
 
         public async Task<IEnumerable<Livro>> GetAllLivros()
         {
-            return await _unitOfWork.Livros.GetAll(includeProperties: "LivrosAutores,LivrosAssuntos,TabelaPrecos");
+            return await _unitOfWork.Livros.GetAll(includeProperties: "LivrosAutores,LivrosAutores.Autor,LivrosAssuntos.Assunto,TabelaPrecos");
         }
 
         public async Task<Livro> GetLivroById(int codL)

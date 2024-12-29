@@ -26,10 +26,14 @@ namespace LivrosApp.Application
             }
             return false;
         }
-        public async Task<bool> DeleteAutor(int codAu)
+        public async Task<(bool, string)> DeleteAutor(int codAu)
         {
             if (codAu > 0)
             {
+                var hasLivro = (await _unitOfWork.LivrosAutores.GetAll(la => la.Autor_CodAu == codAu)).Any();
+                if (hasLivro)
+                    return (false, "Não é possível excluir um autor relacionado à um livro.");
+
                 var autor = await _unitOfWork.Autores.GetById(codAu);
                 if (autor != null)
                 {
@@ -38,12 +42,12 @@ namespace LivrosApp.Application
                     var result = _unitOfWork.Save();
 
                     if (result > 0)
-                        return true;
+                        return (true, "");
                     else
-                        return false;
+                        return (false, "");
                 }
             }
-            return false;
+            return (false, "");
         }
         public async Task<IEnumerable<Autor>> GetAllAutores()
         {

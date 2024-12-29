@@ -8,6 +8,6 @@ namespace LivrosApp.Application.Interfaces
         Task<IEnumerable<CanalVenda>> GetAllCanaisVenda();
         Task<CanalVenda> GetCanalVendaById(int codCv);
         Task<bool> UpdateCanalVenda(CanalVenda detalhesCanalVenda);
-        Task<bool> DeleteCanalVenda(int codCv);
+        Task<(bool, string)> DeleteCanalVenda(int codCv);
     }
 }

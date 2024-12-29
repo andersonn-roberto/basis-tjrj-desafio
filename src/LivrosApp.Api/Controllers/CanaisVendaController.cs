@@ -57,12 +57,12 @@ namespace LivrosApp.Server.Controllers
         [HttpDelete("{codCV}")]
         public async Task<IActionResult> DeleteCanalVenda(int codCV)
         {
-            var result = await _canalVendaService.DeleteCanalVenda(codCV);
+            var (result, mensagem) = await _canalVendaService.DeleteCanalVenda(codCV);
             if (result)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(mensagem);
         }
     }
 }

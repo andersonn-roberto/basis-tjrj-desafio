@@ -56,12 +56,12 @@ namespace LivrosApp.Server.Controllers
         [HttpDelete("{codAs}")]
         public async Task<IActionResult> DeleteAssunto(int codAs)
         {
-            var result = await _assuntoService.DeleteAssunto(codAs);
+            var (result, mensagem) = await _assuntoService.DeleteAssunto(codAs);
             if (result)
             {
                 return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(mensagem);
         }
     }
 }

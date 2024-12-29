@@ -8,6 +8,6 @@ namespace LivrosApp.Application.Interfaces
         Task<IEnumerable<Autor>> GetAllAutores();
         Task<Autor> GetAutorById(int codAu);
         Task<bool> UpdateAutor(Autor detalhesAutor);
-        Task<bool> DeleteAutor(int codAu);
+        Task<(bool, string)> DeleteAutor(int codAu);
     }
 }

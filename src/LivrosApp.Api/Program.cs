@@ -4,6 +4,7 @@ using LivrosApp.Dominio.Interfaces;
 using LivrosApp.Infra.Context;
 using LivrosApp.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
@@ -16,9 +17,11 @@ namespace LivrosApp.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            QuestPDF.Settings.License = LicenseType.Community;
+
             // Add services to the container.
 
-            builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             builder.Services.AddEndpointsApiExplorer();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string" + "'DefaultConnection' not found.");
@@ -43,11 +46,15 @@ namespace LivrosApp.Api
             builder.Services.AddScoped<ILivroService, LivroService>();
             builder.Services.AddScoped<ITabelaPrecoService, TabelaPrecoService>();
 
+            builder.Services.AddScoped<IPdfService, PdfService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
+
+            app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthorization();
 

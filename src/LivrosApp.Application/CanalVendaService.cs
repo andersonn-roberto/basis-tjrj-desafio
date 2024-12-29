@@ -24,22 +24,26 @@ namespace LivrosApp.Application
             }
             return false;
         }
-        public async Task<bool> DeleteCanalVenda(int codCv)
+        public async Task<(bool, string)> DeleteCanalVenda(int codCv)
         {
             if (codCv > 0)
             {
+                var hasTabelaPreco = (await _unitOfWork.TabelasPrecos.GetAll(tp => tp.CodCv == codCv)).Any();
+                if (hasTabelaPreco)
+                    return (false, "Não é possível excluir um canal de venda relacionado à uma tabela de preços.");
+
                 var canalVenda = await _unitOfWork.CanaisVenda.GetById(codCv);
                 if (canalVenda != null)
                 {
                     _unitOfWork.CanaisVenda.Remove(canalVenda);
                     var result = _unitOfWork.Save();
                     if (result > 0)
-                        return true;
+                        return (true, "");
                     else
-                        return false;
+                        return (false, "");
                 }
             }
-            return false;
+            return (false, "");
         }
         public async Task<IEnumerable<CanalVenda>> GetAllCanaisVenda()
         {

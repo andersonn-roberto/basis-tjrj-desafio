@@ -1,0 +1,34 @@
+<h4>Assuntos</h4>
+
+<button class="btn btn-primary" (click)="addAssunto()">
+  Adicionar Assunto
+</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Descrição</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (assunto of assuntos; track assunto.descricao; let i = $index) {
+    <tr>
+      <td>{{ assunto.codAs }}</td>
+      <td>{{ assunto.descricao }}</td>
+      <td>
+        <a
+          class="btn btn-warning"
+          href=""
+          [routerLink]="['/assuntosEdit/', assunto.codAs]"
+          >Editar</a
+        >
+        <a class="btn btn-danger" (click)="deleteAssunto(assunto.codAs)"
+          >Excluir</a
+        >
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
