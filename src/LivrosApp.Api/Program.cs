@@ -5,6 +5,7 @@ using LivrosApp.Infra.Context;
 using LivrosApp.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace LivrosApp.Api
 {
@@ -17,7 +18,7 @@ namespace LivrosApp.Api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             builder.Services.AddEndpointsApiExplorer();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string" + "'DefaultConnection' not found.");
@@ -26,16 +27,23 @@ namespace LivrosApp.Api
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            builder.Services.AddScoped<ILivroRepository, LivroRepository>();
+            builder.Services.AddScoped<IAssuntoRepository, AssuntoRepository>();
             builder.Services.AddScoped<IAutorRepository, AutorRepository>();
+            builder.Services.AddScoped<ICanalVendaRepository, CanalVendaRepository>();
+            builder.Services.AddScoped<ILivroAssuntoRepository, LivroAssuntoRepository>();
+            builder.Services.AddScoped<ILivroAutorRepository, LivroAutorRepository>();
+            builder.Services.AddScoped<ILivroRepository, LivroRepository>();
+            builder.Services.AddScoped<ITabelaPrecoRepository, TabelaPrecoRepository>();
 
-            builder.Services.AddScoped<ILivroService, LivroService>();
+            builder.Services.AddScoped<IAssuntoService, AssuntoService>();
             builder.Services.AddScoped<IAutorService, AutorService>();
+            builder.Services.AddScoped<ICanalVendaService, CanalVendaService>();
+            builder.Services.AddScoped<ILivroAssuntoService, LivroAssuntoService>();
+            builder.Services.AddScoped<ILivroAutorService, LivroAutorService>();
+            builder.Services.AddScoped<ILivroService, LivroService>();
+            builder.Services.AddScoped<ITabelaPrecoService, TabelaPrecoService>();
 
             var app = builder.Build();
-
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
 
             // Configure the HTTP request pipeline.
 
@@ -44,8 +52,6 @@ namespace LivrosApp.Api
             app.UseAuthorization();
 
             app.MapControllers();
-
-            app.MapFallbackToFile("/index.html");
 
             await app.RunAsync();
         }

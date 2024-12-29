@@ -16,7 +16,9 @@ namespace LivrosApp.Application
             if (detalhesAutor != null)
             {
                 await _unitOfWork.Autores.Add(detalhesAutor);
+
                 var result = _unitOfWork.Save();
+
                 if (result > 0)
                     return true;
                 else
@@ -32,7 +34,9 @@ namespace LivrosApp.Application
                 if (autor != null)
                 {
                     _unitOfWork.Autores.Remove(autor);
+
                     var result = _unitOfWork.Save();
+
                     if (result > 0)
                         return true;
                     else
@@ -50,6 +54,7 @@ namespace LivrosApp.Application
             if (codAu > 0)
             {
                 var autor = await _unitOfWork.Autores.GetById(codAu);
+
                 if (autor != null)
                 {
                     return autor;

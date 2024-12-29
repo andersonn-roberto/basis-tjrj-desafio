@@ -6,14 +6,31 @@ namespace LivrosApp.Infra.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly LivrosAppContext _context;
-        public ILivroRepository Livros { get; }
+        public IAssuntoRepository Assuntos { get; }
         public IAutorRepository Autores { get; }
+        public ICanalVendaRepository CanaisVenda { get; }
+        public ILivroAssuntoRepository LivrosAssuntos { get; }
+        public ILivroAutorRepository LivrosAutores { get; }
+        public ILivroRepository Livros { get; }
+        public ITabelaPrecoRepository TabelasPrecos { get; }
 
-        public UnitOfWork(LivrosAppContext context, ILivroRepository repositoryLivro, IAutorRepository autores)
+        public UnitOfWork(LivrosAppContext context,
+                          IAssuntoRepository assuntos,
+                          IAutorRepository autores,
+                          ICanalVendaRepository canaisVenda,
+                          ILivroAssuntoRepository livrosAssuntos,
+                          ILivroAutorRepository livrosAutores,
+                          ILivroRepository livros,
+                          ITabelaPrecoRepository tabelasPrecos)
         {
             _context = context;
-            Livros = repositoryLivro;
+            Assuntos = assuntos;
             Autores = autores;
+            CanaisVenda = canaisVenda;
+            LivrosAssuntos = livrosAssuntos;
+            LivrosAutores = livrosAutores;
+            Livros = livros;
+            TabelasPrecos = tabelasPrecos;
         }
 
         public int Save()

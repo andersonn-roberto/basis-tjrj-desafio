@@ -2,8 +2,13 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        ILivroRepository Livros { get; }
+        IAssuntoRepository Assuntos { get; }
         IAutorRepository Autores { get; }
+        ICanalVendaRepository CanaisVenda { get; }
+        ILivroAssuntoRepository LivrosAssuntos { get; }
+        ILivroAutorRepository LivrosAutores { get; }
+        ILivroRepository Livros { get; }
+        ITabelaPrecoRepository TabelasPrecos { get; }
         int Save();
     }
 }

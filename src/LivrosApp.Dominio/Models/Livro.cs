@@ -7,8 +7,8 @@
         public required string Editora { get; set; }
         public int Edicao { get; set; }
         public required string AnoPublicacao { get; set; }
-        public List<LivroAutor> LivrosAutores { get; } = [];
-        public List<LivroAssunto> LivrosAssuntos { get; } = [];
-        public List<TabelaPreco> TabelaPrecos { get; } = [];
+        public List<LivroAutor> LivrosAutores { get; set; } = [];
+        public List<LivroAssunto> LivrosAssuntos { get; set; } = [];
+        public List<TabelaPreco> TabelaPrecos { get; set; } = [];
     }
 }
