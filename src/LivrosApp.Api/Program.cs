@@ -41,10 +41,7 @@ namespace LivrosApp.Api
             builder.Services.AddScoped<IAssuntoService, AssuntoService>();
             builder.Services.AddScoped<IAutorService, AutorService>();
             builder.Services.AddScoped<ICanalVendaService, CanalVendaService>();
-            builder.Services.AddScoped<ILivroAssuntoService, LivroAssuntoService>();
-            builder.Services.AddScoped<ILivroAutorService, LivroAutorService>();
             builder.Services.AddScoped<ILivroService, LivroService>();
-            builder.Services.AddScoped<ITabelaPrecoService, TabelaPrecoService>();
 
             builder.Services.AddScoped<IPdfService, PdfService>();
 
