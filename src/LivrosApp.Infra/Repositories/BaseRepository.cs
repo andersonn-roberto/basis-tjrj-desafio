@@ -41,7 +41,7 @@ namespace LivrosApp.Infra.Repositories
 
         public async Task<T> GetById(int id)
         {
-            return await _dbSet.FindAsync(id) ?? throw new InvalidOperationException("Entity not found");
+            return await _dbSet.FindAsync(id) ?? throw new InvalidOperationException("Registro não encontrado.");
         }
 
         public virtual async void Delete(int id)

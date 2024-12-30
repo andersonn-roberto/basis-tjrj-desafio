@@ -1,9 +1,11 @@
 ﻿using LivrosApp.Dominio.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace LivrosApp.Application.Inputs
 {
     public class TabelaPrecoCreateModel
     {
+        [Required(ErrorMessage = "O campo Valor é obrigatório.")]
         public decimal Valor { get; set; }
         public int CodCv { get; set; }
 
