@@ -60,7 +60,7 @@ namespace LivrosApp.Application
         {
             if (codL > 0)
             {
-                var livro = (await _unitOfWork.Livros.GetAll(l => l.CodL == codL, includeProperties: "LivrosAutores,LivrosAssuntos,TabelaPrecos")).First();
+                var livro = (await _unitOfWork.Livros.GetAll(l => l.CodL == codL, includeProperties: "LivrosAutores,LivrosAssuntos,TabelaPrecos")).FirstOrDefault();
                 if (livro != null)
                 {
                     return livro;
@@ -74,7 +74,7 @@ namespace LivrosApp.Application
             if (detalhesLivro != null)
             {
                 var livro = await _unitOfWork.Livros.GetAll(l => l.CodL == detalhesLivro.CodL, includeProperties: "LivrosAutores,LivrosAssuntos,TabelaPrecos");
-                var livroParaAtualizar = livro.First();
+                var livroParaAtualizar = livro.FirstOrDefault();
 
                 if (livroParaAtualizar != null)
                 {
