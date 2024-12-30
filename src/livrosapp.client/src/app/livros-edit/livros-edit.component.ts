@@ -83,6 +83,7 @@ export class LivrosEditComponent {
 
   editLivro() {
     const livro = {
+      codL: this.codL,
       titulo: this.titulo.value,
       editora: this.editora.value,
       edicao: this.edicao.value,
@@ -97,8 +98,8 @@ export class LivrosEditComponent {
       ],
     };
 
-    // this.livrosService.addLivro(livro).subscribe(() => {
-    //   this.router.navigate(['/livros']);
-    // });
+    this.livrosService.editLivro(livro).subscribe(() => {
+      this.router.navigate(['/livros']);
+    });
   }
 }
