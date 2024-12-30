@@ -18,15 +18,5 @@ namespace LivrosApp.Application.Inputs
                 Valor = Valor
             };
         }
-
-        public TabelaPreco ToTabelaPreco(int livroCodL)
-        {
-            return new TabelaPreco
-            {
-                CodCv = CodCv,
-                CodL = livroCodL,
-                Valor = Valor
-            };
-        }
     }
 }
