@@ -1,8 +1,6 @@
-<h4>Canais Venda</h4>
+<h4>Livros</h4>
 
-<button class="btn btn-primary" (click)="addLivro()">
-  Adicionar Canal Venda
-</button>
+<button class="btn btn-primary" (click)="addLivro()">Adicionar Livro</button>
 
 <table class="table table-striped">
   <thead>
@@ -31,10 +29,10 @@
         <a
           class="btn btn-warning"
           href=""
-          [routerLink]="['/livrosEdit/', livro.codCv]"
+          [routerLink]="['/livrosEdit/', livro.codL]"
           >Editar</a
         >
-        <a class="btn btn-danger" (click)="deleteLivro(livro.codCv)">Excluir</a>
+        <a class="btn btn-danger" (click)="deleteLivro(livro.codL)">Excluir</a>
       </td>
     </tr>
     }

@@ -1,1 +1,144 @@
-<p>livros-edit works!</p>
+<h4>Editando Livro</h4>
+
+<form>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="titulo">Título</label>
+    </div>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        id="titulo"
+        name="titulo"
+        [formControl]="titulo"
+        required
+        maxlength="20"
+      />
+    </div>
+  </div>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="editora">Editora</label>
+    </div>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        id="editora"
+        name="editora"
+        [formControl]="editora"
+        required
+        maxlength="20"
+      />
+    </div>
+  </div>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="edicao">Edição</label>
+    </div>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        id="edicao"
+        name="edicao"
+        [formControl]="edicao"
+        required
+        maxlength="20"
+      />
+    </div>
+  </div>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="anoPublicacao">Ano Publicação</label>
+    </div>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        id="anoPublicacao"
+        name="anoPublicacao"
+        [formControl]="anoPublicacao"
+        required
+        maxlength="20"
+      />
+    </div>
+  </div>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="autoresSelecionados">Autor(es)</label>
+    </div>
+    <div class="col-sm-9">
+      <select
+        name="autoresSelecionados"
+        id="autoresSelecionados"
+        class="form-select"
+        [formControl]="autoresSelecionados"
+        multiple
+        required="required"
+      >
+        <option *ngFor="let autor of autores" [value]="autor.codAu">
+          {{ autor.nome }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="assuntosSelecionados">Assunto(s)</label>
+    </div>
+    <div class="col-sm-9">
+      <select
+        name="assuntosSelecionados"
+        id="assuntosSelecionados"
+        class="form-select"
+        [formControl]="assuntosSelecionados"
+        multiple
+        required="required"
+      >
+        <option *ngFor="let assunto of assuntos" [value]="assunto.codAs">
+          {{ assunto.descricao }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="canaisVendaSelecionados">Canal Venda</label>
+    </div>
+    <div class="col-sm-9">
+      <select
+        name="canaisVendaSelecionados"
+        id="canaisVendaSelecionados"
+        class="form-select"
+        [formControl]="canaisVendaSelecionados"
+        required="required"
+      >
+        <option
+          *ngFor="let canalVenda of canaisVenda"
+          [value]="canalVenda.codCv"
+        >
+          {{ canalVenda.nome }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group p-10 row">
+    <div class="col-sm-3">
+      <label for="valor">Valor</label>
+    </div>
+    <div class="col-sm-9">
+      <input
+        type="number"
+        class="form-control"
+        id="valor"
+        name="valor"
+        [formControl]="valor"
+        required
+      />
+    </div>
+  </div>
+  <a href="" routerLink="/livros" class="btn btn-danger back">Voltar</a>
+  <button class="btn btn-success" (click)="editLivro()">Adicionar</button>
+</form>

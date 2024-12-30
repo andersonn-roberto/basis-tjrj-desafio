@@ -41,7 +41,7 @@ export class LivrosComponent {
 
   deleteLivro(codL: number) {
     this.livrosService.deleteLivro(codL).subscribe(() => {
-      this.router.navigate(['/livros']);
+      this.getLivros();
     });
   }
 }

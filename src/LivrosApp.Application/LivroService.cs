@@ -60,7 +60,7 @@ namespace LivrosApp.Application
         {
             if (codL > 0)
             {
-                var livro = await _unitOfWork.Livros.GetById(codL);
+                var livro = (await _unitOfWork.Livros.GetAll(l => l.CodL == codL, includeProperties: "LivrosAutores,LivrosAssuntos,TabelaPrecos")).First();
                 if (livro != null)
                 {
                     return livro;
