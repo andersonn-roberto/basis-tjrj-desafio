@@ -1,59 +1,116 @@
-# LivrosappClient
+# Desafio .NET TJRJ
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+## Tecnologias e frameworks utilizados
 
-## Development server
+[ASP .NET Core](https://dotnet.microsoft.com/pt-br/apps/aspnet) versão 8 com C#
 
-To start a local development server, run:
+[Angular](https://angular.dev) versão 19.0.5 com [Typescript](https://www.typescriptlang.org/), [Angular CLI](https://angular.dev/tools/cli) versão 19.0.6
 
-```bash
-ng serve
+[Node.js](https://nodejs.org/en) versão 22.12.0
+
+[Coverlet](https://github.com/coverlet-coverage/coverlet) e [ReportGenerator](https://github.com/danielpalme/ReportGenerator) para relatório de cobertura
+
+[Sql Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads) para o banco de dados
+
+## Requisitos
+
+- [.NET Core SDK](https://dotnet.microsoft.com/download) versão 8.0.11
+- [Node.js](https://nodejs.org/en) versão 22.12.0
+- [Angular CLI](https://angular.dev/tools/cli) versão 19.0.6
+- [Sql Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
+
+## Instalação
+
+- Clone o repositório do projeto:
+
+```
+git clone https://github.com/andersonn-roberto/basis-tjrj-desafio.git
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Entre no diretório do projeto clonado:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+cd basis-tjrj-desafio
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Execute o comando para restaurar as dependências e fazer build da aplicação:
 
-```bash
-ng generate --help
+```
+dotnet build
 ```
 
-## Building
+## Executando a aplicação
 
-To build the project run:
+- Entre no diretório da aplicação back-end:
 
-```bash
-ng build
+```
+cd src\LivrosApp.Api
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Abra o arquivo `appsettings.Development.json` e altere a string de conexão com o banco de dados para a sua configuração:
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```json
+"ConnectionStrings": {
+    "DefaultConnection": "Server=nomeouipdoservidor;Database=LivrosApp;User Id=usuariodobancodedados;Password=senhadousuario;TrustServerCertificate=True"
+  }
 ```
 
-## Running end-to-end tests
+- Mantenha o nome do banco de dados como `LivrosApp`.
 
-For end-to-end (e2e) testing, run:
+- Salve o arquivo.
 
-```bash
-ng e2e
+- Execute a aplicação:
+
+```
+dotnet run --launch-profile "https"
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Acesse a aplicação no endereço: [https://localhost:55733](https://localhost:55733)
+  > Caso o browser reclame do certificado, continue mesmo assim.
 
-## Additional Resources
+## Executando os testes de unidade e gerando o relatório de cobertura
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Volte para o diretório do projeto clonado:
+
+```
+cd ..\..\tests\LivrosApp.Test
+```
+
+- Instale o pacote ReportGenerator:
+
+```
+dotnet tool install -g dotnet-reportgenerator-globaltool
+```
+
+- Execute os testes gerando o relatório de cobertura:
+
+```
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+> Na saida do teste vai gerar algo assim:
+
+`Attachments:
+  C:\Projetos\TI\Estudos\Basis\LivrosApp\test\LivrosApp.Test\TestResults\cadd4836-4ffb-4d64-a14c-7f9884786d03\coverage.cobertura.xml`
+
+- Execute o ReportGenerator para gerar uma página HTML do relatório utilizando o caminho do Attachments do passo anterior:
+
+  > reportgenerator -reports:"C:\Projetos\TI\Estudos\Basis\LivrosApp\test\LivrosApp.Test\TestResults\cadd4836-4ffb-4d64-a14c-7f9884786d03\coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html
+
+- Entre no diterório que o ReportGenerator criou:
+
+```
+cd coveragereport
+```
+
+- Abra o file explorer:
+
+```
+explorer .
+```
+
+- Dê um duplo clique no arquivo `index.html`
+
+---
+
+Caso tenha problemas com o relatório de cobertura, veja [esse artigo da Microsoft](https://learn.microsoft.com/pt-br/dotnet/core/testing/unit-testing-code-coverage?tabs=windows).
