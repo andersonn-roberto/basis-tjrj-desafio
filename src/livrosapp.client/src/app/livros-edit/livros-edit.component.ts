@@ -65,19 +65,29 @@ export class LivrosEditComponent {
   }
 
   getLivroById() {
-    this.livrosService.getLivroById(this.codL).subscribe((response: any) => {
-      this.titulo.setValue(response.titulo);
-      this.editora.setValue(response.editora);
-      this.edicao.setValue(response.edicao);
-      this.anoPublicacao.setValue(response.anoPublicacao);
-      this.autoresSelecionados.setValue(
-        response.livrosAutores.map((autor: any) => autor.autor_CodAu)
-      );
-      this.assuntosSelecionados.setValue(
-        response.livrosAssuntos.map((assunto: any) => assunto.assunto_CodAs)
-      );
-      this.canaisVendaSelecionados.setValue(response.tabelaPrecos[0].codCv);
-      this.valor.setValue(response.tabelaPrecos[0].valor);
+    this.livrosService.getLivroById(this.codL).subscribe({
+      next: (response: any) => {
+        this.titulo.setValue(response.titulo);
+        this.editora.setValue(response.editora);
+        this.edicao.setValue(response.edicao);
+        this.anoPublicacao.setValue(response.anoPublicacao);
+        this.autoresSelecionados.setValue(
+          response.livrosAutores.map((autor: any) => autor.autor_CodAu)
+        );
+        this.assuntosSelecionados.setValue(
+          response.livrosAssuntos.map((assunto: any) => assunto.assunto_CodAs)
+        );
+        this.canaisVendaSelecionados.setValue(response.tabelaPrecos[0].codCv);
+        this.valor.setValue(response.tabelaPrecos[0].valor);
+      },
+      error: (error) => {
+        let errorMessage = error.error.substring(
+          error.error.indexOf(':') + 2,
+          error.error.indexOf('.\r\n') + 1
+        );
+        window.alert(errorMessage);
+        this.router.navigate(['/livros']);
+      },
     });
   }
 
